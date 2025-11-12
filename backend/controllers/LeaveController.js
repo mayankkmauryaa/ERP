@@ -15,7 +15,7 @@ const getAllLeaves = async (req, res) => {
 
     // Build where clause
     const whereClause = {};
-    
+
     if (employeeId) {
       whereClause.employeeId = employeeId;
     }
@@ -519,7 +519,7 @@ const getMyLeaves = async (req, res) => {
 
     // Build where clause
     const whereClause = { employeeId: employee.id };
-    
+
     if (status) {
       whereClause.status = status;
     }
@@ -636,7 +636,7 @@ const getLeaveStats = async (req, res) => {
       attributes: [
         [require('sequelize').fn('AVG', require('sequelize').col('totalDays')), 'avgDays']
       ],
-      where: { 
+      where: {
         startDate: dateFilter,
         status: 'approved'
       }

@@ -9,9 +9,9 @@ const { validateDepartment, validateId, validatePagination } = require('../middl
  * @desc    Get all departments with pagination and filters
  * @access  Private (Admin, HR)
  */
-router.get('/', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.get('/',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validatePagination,
   DepartmentController.getAllDepartments
 );
@@ -21,9 +21,9 @@ router.get('/',
  * @desc    Get department statistics
  * @access  Private (Admin, HR)
  */
-router.get('/stats', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.get('/stats',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   DepartmentController.getDepartmentStats
 );
 
@@ -32,9 +32,9 @@ router.get('/stats',
  * @desc    Get department by ID
  * @access  Private (Admin, HR)
  */
-router.get('/:id', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.get('/:id',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validateId,
   DepartmentController.getDepartmentById
 );
@@ -44,9 +44,9 @@ router.get('/:id',
  * @desc    Create new department
  * @access  Private (Admin, HR)
  */
-router.post('/', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.post('/',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validateDepartment,
   DepartmentController.createDepartment
 );
@@ -56,9 +56,9 @@ router.post('/',
  * @desc    Update department
  * @access  Private (Admin, HR)
  */
-router.put('/:id', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.put('/:id',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validateId,
   DepartmentController.updateDepartment
 );
@@ -68,9 +68,9 @@ router.put('/:id',
  * @desc    Delete department (soft delete)
  * @access  Private (Admin, HR)
  */
-router.delete('/:id', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.delete('/:id',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validateId,
   DepartmentController.deleteDepartment
 );

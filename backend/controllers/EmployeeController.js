@@ -442,9 +442,9 @@ const getEmployeesByDepartment = async (req, res) => {
     }
 
     const { count, rows: employees } = await Employee.findAndCountAll({
-      where: { 
+      where: {
         departmentId,
-        isActive: true 
+        isActive: true
       },
       include: [
         {

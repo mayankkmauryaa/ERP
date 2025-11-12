@@ -8,10 +8,10 @@ const { User } = require('../models');
  */
 const generateToken = (user) => {
   return jwt.sign(
-    { 
-      userId: user.id, 
-      email: user.email, 
-      role: user.role 
+    {
+      userId: user.id,
+      email: user.email,
+      role: user.role
     },
     process.env.JWT_SECRET,
     { expiresIn: '24h' }
@@ -129,7 +129,7 @@ const login = async (req, res) => {
 const getProfile = async (req, res) => {
   try {
     const user = req.user;
-    
+
     res.json({
       success: true,
       message: 'Profile retrieved successfully',
@@ -159,7 +159,7 @@ const updateProfile = async (req, res) => {
 
     // Check if email is already taken by another user
     if (email && email !== req.user.email) {
-      const existingUser = await User().findOne({ 
+      const existingUser = await User().findOne({
         where: { email, id: { [require('sequelize').Op.ne]: userId } }
       });
       if (existingUser) {

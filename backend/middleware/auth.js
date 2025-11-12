@@ -18,7 +18,7 @@ const authenticateToken = async (req, res, next) => {
 
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
+
     // Get user from database
     const user = await User.findByPk(decoded.userId, {
       attributes: { exclude: ['password'] }
@@ -48,7 +48,7 @@ const authenticateToken = async (req, res, next) => {
         message: 'Invalid token'
       });
     }
-    
+
     if (error.name === 'TokenExpiredError') {
       return res.status(401).json({
         success: false,
@@ -109,7 +109,7 @@ const authorizeEmployeeAccess = async (req, res, next) => {
     // Employees can only access their own data
     if (req.user.role === 'employee') {
       const employeeId = req.params.id || req.params.employeeId;
-      
+
       if (employeeId) {
         // Check if the employee is trying to access their own data
         const employee = await req.user.getEmployee();

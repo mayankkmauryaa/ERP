@@ -11,7 +11,7 @@ const seedDatabase = async () => {
 
     // Test database connection
     await testConnection();
-    
+
     // Sync database models
     await syncDatabase();
 
@@ -121,7 +121,7 @@ const seedDatabase = async () => {
     if (employeeCreated) {
       console.log('👨‍💼 Creating sample employee record...');
       const hrDepartment = departments.find(d => d[0].name === 'Human Resources')[0];
-      
+
       await Employee.findOrCreate({
         where: { userId: employeeUser.id },
         defaults: {
@@ -205,7 +205,7 @@ const seedDatabase = async () => {
     console.log('│ Jane Smith       │ jane.smith@erp.com│ employee  │ jane123     │');
     console.log('│ Mike Johnson    │ mike.johnson@erp.com│ employee │ mike123     │');
     console.log('└─────────────────┴─────────────────┴─────────────┴─────────────┘');
-    
+
     console.log('\n📁 Departments Created:');
     departments.forEach(([dept]) => {
       console.log(`• ${dept.name}`);

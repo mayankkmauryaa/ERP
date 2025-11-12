@@ -15,7 +15,7 @@ const getAllAttendance = async (req, res) => {
 
     // Build where clause
     const whereClause = {};
-    
+
     if (employeeId) {
       whereClause.employeeId = employeeId;
     }
@@ -124,7 +124,7 @@ const markAttendance = async (req, res) => {
       const checkInTime = new Date(`2000-01-01T${checkIn}`);
       const checkOutTime = new Date(`2000-01-01T${checkOut}`);
       workingHours = (checkOutTime - checkInTime) / (1000 * 60 * 60); // Convert to hours
-      
+
       // Ensure working hours is not negative
       if (workingHours < 0) {
         return res.status(400).json({
@@ -215,7 +215,7 @@ const updateAttendance = async (req, res) => {
       const checkInTime = new Date(`2000-01-01T${checkIn}`);
       const checkOutTime = new Date(`2000-01-01T${checkOut}`);
       workingHours = (checkOutTime - checkInTime) / (1000 * 60 * 60);
-      
+
       if (workingHours < 0) {
         return res.status(400).json({
           success: false,
@@ -271,7 +271,7 @@ const getMonthlySummary = async (req, res) => {
     // Validate month and year
     const monthNum = parseInt(month);
     const yearNum = parseInt(year);
-    
+
     if (monthNum < 1 || monthNum > 12) {
       return res.status(400).json({
         success: false,
@@ -315,7 +315,7 @@ const getMonthlySummary = async (req, res) => {
     const absentDays = attendanceRecords.filter(record => record.status === 'absent').length;
     const lateDays = attendanceRecords.filter(record => record.status === 'late').length;
     const halfDays = attendanceRecords.filter(record => record.status === 'half_day').length;
-    
+
     const totalWorkingHours = attendanceRecords.reduce((sum, record) => {
       return sum + (parseFloat(record.workingHours) || 0);
     }, 0);
@@ -395,7 +395,7 @@ const getAttendanceStats = async (req, res) => {
       attributes: [
         [require('sequelize').fn('AVG', require('sequelize').col('workingHours')), 'avgHours']
       ],
-      where: { 
+      where: {
         date: dateFilter,
         workingHours: { [Op.ne]: null }
       }
@@ -490,7 +490,7 @@ const getMyAttendance = async (req, res) => {
 
     // Build where clause
     const whereClause = { employeeId: employee.id };
-    
+
     if (status) {
       whereClause.status = status;
     }

@@ -65,11 +65,11 @@ const User = (sequelize) => {
   });
 
   // Instance methods
-  UserModel.prototype.comparePassword = async function(candidatePassword) {
+  UserModel.prototype.comparePassword = async function (candidatePassword) {
     return await bcrypt.compare(candidatePassword, this.password);
   };
 
-  UserModel.prototype.toJSON = function() {
+  UserModel.prototype.toJSON = function () {
     const values = Object.assign({}, this.get());
     delete values.password;
     return values;

@@ -9,9 +9,9 @@ const { validateLeave, validateLeaveApproval, validateLeaveRejection, validateId
  * @desc    Get all leave requests with pagination and filters
  * @access  Private (Admin, HR)
  */
-router.get('/', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.get('/',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validatePagination,
   LeaveController.getAllLeaves
 );
@@ -21,9 +21,9 @@ router.get('/',
  * @desc    Get leave statistics
  * @access  Private (Admin, HR)
  */
-router.get('/stats', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.get('/stats',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   LeaveController.getLeaveStats
 );
 
@@ -32,8 +32,8 @@ router.get('/stats',
  * @desc    Get current employee's leave requests
  * @access  Private (Employee)
  */
-router.get('/my', 
-  authenticateToken, 
+router.get('/my',
+  authenticateToken,
   validatePagination,
   LeaveController.getMyLeaves
 );
@@ -43,8 +43,8 @@ router.get('/my',
  * @desc    Get leave request by ID
  * @access  Private (Admin, HR, Employee - own data only)
  */
-router.get('/:id', 
-  authenticateToken, 
+router.get('/:id',
+  authenticateToken,
   authorizeEmployeeAccess,
   validateId,
   LeaveController.getLeaveById
@@ -55,8 +55,8 @@ router.get('/:id',
  * @desc    Create new leave request
  * @access  Private (Employee)
  */
-router.post('/', 
-  authenticateToken, 
+router.post('/',
+  authenticateToken,
   validateLeave,
   LeaveController.createLeave
 );
@@ -66,8 +66,8 @@ router.post('/',
  * @desc    Update leave request (only if pending)
  * @access  Private (Employee - own data only)
  */
-router.put('/:id', 
-  authenticateToken, 
+router.put('/:id',
+  authenticateToken,
   authorizeEmployeeAccess,
   validateId,
   LeaveController.updateLeave
@@ -78,9 +78,9 @@ router.put('/:id',
  * @desc    Approve leave request
  * @access  Private (Admin, HR)
  */
-router.put('/:id/approve', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.put('/:id/approve',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validateId,
   validateLeaveApproval,
   LeaveController.approveLeave
@@ -91,9 +91,9 @@ router.put('/:id/approve',
  * @desc    Reject leave request
  * @access  Private (Admin, HR)
  */
-router.put('/:id/reject', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.put('/:id/reject',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validateId,
   validateLeaveRejection,
   LeaveController.rejectLeave
@@ -104,8 +104,8 @@ router.put('/:id/reject',
  * @desc    Delete leave request (only if pending)
  * @access  Private (Employee - own data only)
  */
-router.delete('/:id', 
-  authenticateToken, 
+router.delete('/:id',
+  authenticateToken,
   authorizeEmployeeAccess,
   validateId,
   LeaveController.deleteLeave

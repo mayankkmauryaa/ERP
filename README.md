@@ -29,7 +29,7 @@ A full-stack ERP sample including authentication, employee management, attendanc
 
 ## Folder Structure
 
-```
+```terminal
 ERP/
   frontend/        # Next.js app
   backend/         # Express API (assumed)
@@ -40,7 +40,7 @@ ERP/
 
 Create `frontend/.env.local`:
 
-```
+```terminal
 # Base API URL
 NEXT_PUBLIC_API_URL=http://localhost:5000/api
 
@@ -60,7 +60,7 @@ On the backend, ensure:
 
 Frontend:
 
-```
+```terminal
 cd frontend
 npm install
 npm run dev
@@ -69,7 +69,7 @@ npm run dev
 
 Backend (example):
 
-```
+```terminal
 cd backend
 npm install
 npm run dev
@@ -80,7 +80,7 @@ npm run dev
 
 Frontend:
 
-```
+```terminal
 cd frontend
 npm run build
 npm run start

@@ -9,9 +9,9 @@ const { validateAttendance, validateCheckIn, validateCheckOut, validateId, valid
  * @desc    Get all attendance records with pagination and filters
  * @access  Private (Admin, HR)
  */
-router.get('/', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.get('/',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validatePagination,
   AttendanceController.getAllAttendance
 );
@@ -21,9 +21,9 @@ router.get('/',
  * @desc    Get attendance statistics
  * @access  Private (Admin, HR)
  */
-router.get('/stats', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.get('/stats',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   AttendanceController.getAttendanceStats
 );
 
@@ -32,8 +32,8 @@ router.get('/stats',
  * @desc    Get monthly attendance summary for an employee
  * @access  Private (Admin, HR, Employee - own data only)
  */
-router.get('/monthly/:employeeId/:month/:year', 
-  authenticateToken, 
+router.get('/monthly/:employeeId/:month/:year',
+  authenticateToken,
   authorizeEmployeeAccess,
   AttendanceController.getMonthlySummary
 );
@@ -43,9 +43,9 @@ router.get('/monthly/:employeeId/:month/:year',
  * @desc    Mark attendance for an employee
  * @access  Private (Admin, HR)
  */
-router.post('/', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.post('/',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validateAttendance,
   AttendanceController.markAttendance
 );
@@ -55,9 +55,9 @@ router.post('/',
  * @desc    Update attendance record
  * @access  Private (Admin, HR)
  */
-router.put('/:id', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.put('/:id',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validateId,
   AttendanceController.updateAttendance
 );
@@ -67,9 +67,9 @@ router.put('/:id',
  * @desc    Get attendance record by ID
  * @access  Private (Admin, HR)
  */
-router.get('/:id', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.get('/:id',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validateId,
   AttendanceController.getAttendanceById
 );
@@ -79,8 +79,8 @@ router.get('/:id',
  * @desc    Get current employee's attendance records
  * @access  Private (Employee)
  */
-router.get('/my/records', 
-  authenticateToken, 
+router.get('/my/records',
+  authenticateToken,
   validatePagination,
   AttendanceController.getMyAttendance
 );
@@ -90,8 +90,8 @@ router.get('/my/records',
  * @desc    Get today's attendance status for current employee
  * @access  Private (Employee)
  */
-router.get('/my/today', 
-  authenticateToken, 
+router.get('/my/today',
+  authenticateToken,
   AttendanceController.getTodayStatus
 );
 
@@ -100,8 +100,8 @@ router.get('/my/today',
  * @desc    Check in for the day
  * @access  Private (Employee)
  */
-router.post('/checkin', 
-  authenticateToken, 
+router.post('/checkin',
+  authenticateToken,
   validateCheckIn,
   AttendanceController.checkIn
 );
@@ -111,8 +111,8 @@ router.post('/checkin',
  * @desc    Check out for the day
  * @access  Private (Employee)
  */
-router.post('/checkout', 
-  authenticateToken, 
+router.post('/checkout',
+  authenticateToken,
   validateCheckOut,
   AttendanceController.checkOut
 );

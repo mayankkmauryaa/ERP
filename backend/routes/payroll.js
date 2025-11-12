@@ -9,9 +9,9 @@ const { validatePayroll, validateId, validatePagination } = require('../middlewa
  * @desc    Get all payroll records with pagination and filters
  * @access  Private (Admin, HR)
  */
-router.get('/', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.get('/',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validatePagination,
   PayrollController.getAllPayrolls
 );
@@ -21,9 +21,9 @@ router.get('/',
  * @desc    Get payroll statistics
  * @access  Private (Admin, HR)
  */
-router.get('/stats', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.get('/stats',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   PayrollController.getPayrollStats
 );
 
@@ -32,8 +32,8 @@ router.get('/stats',
  * @desc    Get payroll by ID
  * @access  Private (Admin, HR, Employee - own data only)
  */
-router.get('/:id', 
-  authenticateToken, 
+router.get('/:id',
+  authenticateToken,
   authorizeEmployeeAccess,
   validateId,
   PayrollController.getPayrollById
@@ -44,9 +44,9 @@ router.get('/:id',
  * @desc    Generate payroll for an employee
  * @access  Private (Admin, HR)
  */
-router.post('/', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.post('/',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validatePayroll,
   PayrollController.generatePayroll
 );
@@ -56,9 +56,9 @@ router.post('/',
  * @desc    Generate bulk payroll for all employees
  * @access  Private (Admin, HR)
  */
-router.post('/bulk', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.post('/bulk',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   PayrollController.generateBulkPayroll
 );
 
@@ -67,9 +67,9 @@ router.post('/bulk',
  * @desc    Update payroll record
  * @access  Private (Admin, HR)
  */
-router.put('/:id', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.put('/:id',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validateId,
   PayrollController.updatePayroll
 );
@@ -79,9 +79,9 @@ router.put('/:id',
  * @desc    Mark payroll as paid
  * @access  Private (Admin, HR)
  */
-router.put('/:id/mark-paid', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.put('/:id/mark-paid',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validateId,
   PayrollController.markPayrollAsPaid
 );
@@ -91,8 +91,8 @@ router.put('/:id/mark-paid',
  * @desc    Get current employee's payroll records
  * @access  Private (Employee)
  */
-router.get('/my', 
-  authenticateToken, 
+router.get('/my',
+  authenticateToken,
   validatePagination,
   PayrollController.getMyPayrolls
 );
@@ -102,8 +102,8 @@ router.get('/my',
  * @desc    Get payroll summary for an employee
  * @access  Private (Admin, HR, Employee - own data only)
  */
-router.get('/summary/:employeeId', 
-  authenticateToken, 
+router.get('/summary/:employeeId',
+  authenticateToken,
   authorizeEmployeeAccess,
   validateId,
   PayrollController.getPayrollSummary
@@ -114,9 +114,9 @@ router.get('/summary/:employeeId',
  * @desc    Cancel payroll record
  * @access  Private (Admin, HR)
  */
-router.put('/:id/cancel', 
-  authenticateToken, 
-  authorizeRoles('admin', 'hr'), 
+router.put('/:id/cancel',
+  authenticateToken,
+  authorizeRoles('admin', 'hr'),
   validateId,
   PayrollController.cancelPayroll
 );

@@ -52,7 +52,7 @@ app.use('*', (req, res) => {
 // Global error handler
 app.use((error, req, res, next) => {
   console.error('Global error handler:', error);
-  
+
   res.status(error.status || 500).json({
     success: false,
     message: error.message || 'Internal server error',
@@ -65,13 +65,13 @@ const startServer = async () => {
   try {
     // Initialize database connection
     await initializeDatabase();
-    
+
     // Setup models and associations
     setupModels();
-    
+
     // Sync database models
     await syncDatabase();
-    
+
     // Start listening
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);

@@ -13,7 +13,7 @@ let User, Department, Employee, Attendance, Payroll, Leave;
 
 const initializeModels = () => {
   const sequelize = dbConfig.getSequelize();
-  
+
   User = UserFactory(sequelize);
   Department = DepartmentFactory(sequelize);
   Employee = EmployeeFactory(sequelize);
@@ -123,7 +123,7 @@ const syncDatabase = async () => {
   try {
     // Setup models first
     setupModels();
-    
+
     const sequelize = dbConfig.getSequelize();
     await sequelize.sync({ alter: true });
     console.log('✅ Database synchronized successfully.');

@@ -20,7 +20,7 @@ class DatabaseConfig {
   validateConfig() {
     const requiredVars = ['DB_NAME', 'DB_USER', 'DB_PASS', 'DB_HOST'];
     const missingVars = requiredVars.filter(varName => !process.env[varName]);
-    
+
     if (missingVars.length > 0) {
       console.warn(`⚠️  Missing environment variables: ${missingVars.join(', ')}`);
       console.warn('Using default values. Please set these variables in your .env file for production.');
@@ -33,7 +33,7 @@ class DatabaseConfig {
   getConfig() {
     const isDevelopment = process.env.NODE_ENV === 'development';
     const isProduction = process.env.NODE_ENV === 'production';
-    
+
     return {
       database: process.env.DB_NAME || 'erp_database',
       username: process.env.DB_USER || 'root',
@@ -71,13 +71,13 @@ class DatabaseConfig {
   async initialize() {
     try {
       this.validateConfig();
-      
+
       const config = this.getConfig();
       this.sequelize = new Sequelize(config);
-      
+
       await this.testConnection();
       this.isConnected = true;
-      
+
       console.log('✅ Database configuration initialized successfully');
       return this.sequelize;
     } catch (error) {
@@ -97,7 +97,7 @@ class DatabaseConfig {
     } catch (error) {
       this.retryCount++;
       console.error(`❌ Unable to connect to the database (attempt ${this.retryCount}/${this.maxRetries}):`, error.message);
-      
+
       if (this.retryCount < this.maxRetries) {
         console.log(`⏳ Retrying connection in ${this.retryDelay / 1000} seconds...`);
         await this.delay(this.retryDelay);

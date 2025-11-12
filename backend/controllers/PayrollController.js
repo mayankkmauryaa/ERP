@@ -70,10 +70,10 @@ const calculateAttendanceBonus = async (employeeId, month, year) => {
     let totalBonus = 0;
     const presentDays = attendanceRecords.filter(record => record.status === 'present').length;
     const totalWorkingDays = attendanceRecords.length;
-    
+
     if (totalWorkingDays > 0) {
       const attendancePercentage = (presentDays / totalWorkingDays) * 100;
-      
+
       // Bonus for perfect attendance (100%)
       if (attendancePercentage === 100) {
         totalBonus = 500; // $500 bonus for perfect attendance
@@ -105,7 +105,7 @@ const getAllPayrolls = async (req, res) => {
 
     // Build where clause
     const whereClause = {};
-    
+
     if (employeeId) {
       whereClause.employeeId = employeeId;
     }
@@ -253,14 +253,14 @@ const generatePayroll = async (req, res) => {
 
     // Calculate leave deductions for the month
     const leaveDeductions = await calculateLeaveDeductions(employeeId, month, year);
-    
+
     // Calculate attendance bonus for the month
     const attendanceBonus = await calculateAttendanceBonus(employeeId, month, year);
 
     // Calculate total pay
-    const totalPay = parseFloat(baseSalary) + parseFloat(bonus) + 
-                    parseFloat(overtime) + parseFloat(allowances) + parseFloat(attendanceBonus) - 
-                    parseFloat(deductions) - parseFloat(leaveDeductions);
+    const totalPay = parseFloat(baseSalary) + parseFloat(bonus) +
+      parseFloat(overtime) + parseFloat(allowances) + parseFloat(attendanceBonus) -
+      parseFloat(deductions) - parseFloat(leaveDeductions);
 
     // Create payroll record
     const payroll = await Payroll.create({
@@ -337,15 +337,15 @@ const updatePayroll = async (req, res) => {
     }
 
     // Recalculate total pay if financial fields are updated
-    if (updateData.baseSalary || updateData.bonus || updateData.overtime || 
-        updateData.allowances || updateData.deductions) {
-      
+    if (updateData.baseSalary || updateData.bonus || updateData.overtime ||
+      updateData.allowances || updateData.deductions) {
+
       const baseSalary = parseFloat(updateData.baseSalary || payroll.baseSalary);
       const bonus = parseFloat(updateData.bonus || payroll.bonus);
       const overtime = parseFloat(updateData.overtime || payroll.overtime);
       const allowances = parseFloat(updateData.allowances || payroll.allowances);
       const deductions = parseFloat(updateData.deductions || payroll.deductions);
-      
+
       updateData.totalPay = baseSalary + bonus + overtime + allowances - deductions;
     }
 
@@ -403,7 +403,7 @@ const markPayrollAsPaid = async (req, res) => {
 
     // Update payroll status and payment date
     await Payroll.update(
-      { 
+      {
         status: 'paid',
         paymentDate: paymentDate || new Date().toISOString().split('T')[0],
         paidBy,
@@ -558,8 +558,8 @@ const generateBulkPayroll = async (req, res) => {
         }
 
         // Calculate total pay
-        const totalPay = parseFloat(employee.salary) + parseFloat(bonus) + 
-                        parseFloat(overtime) + parseFloat(allowances) - parseFloat(deductions);
+        const totalPay = parseFloat(employee.salary) + parseFloat(bonus) +
+          parseFloat(overtime) + parseFloat(allowances) - parseFloat(deductions);
 
         // Create payroll record
         const payroll = await Payroll.create({
@@ -624,7 +624,7 @@ const getMyPayrolls = async (req, res) => {
 
     // Build where clause
     const whereClause = { employeeId: employee.id };
-    
+
     if (month) {
       whereClause.month = month;
     }
@@ -803,7 +803,7 @@ const cancelPayroll = async (req, res) => {
 
     // Update payroll status
     await Payroll.update(
-      { 
+      {
         status: 'cancelled',
         notes: reason || payroll.notes
       },
